@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+.name{
+    border-radius: 12px;
+    background-color: antiquewhite;
+    padding: 20px;
+    max-width: fit-content;
+}

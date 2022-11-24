@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="d-flex justify-content-between mb-5">
+    <h2>Students</h2>
+    <a href="{% url 'add' %}"><button class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add Student</button></a>
+</div>
+
+
+<div class="table-responsive datatable-custom">
+    <table id="datatableColumnSearch" class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+           data-hs-datatables-options='{
+                   "order": [],
+                   "orderCellsTop": true
+                 }'>
+      <thead class="thead-light">
+      <tr>
+        <th>Name</th>
+        <th>Admission Number</th>
+        <th>Class</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <th>
+          <input type="text" id="column1_search" class="form-control form-control-sm" placeholder="Search names">
+        </th>
+        <th>
+          <input type="text" id="column2_search" class="form-control form-control-sm" placeholder="Search dob">
+        </th>
+        <th>
+          <input type="text" id="column3_search" class="form-control form-control-sm" placeholder="Search class">
+        </th>
+        <th>
+          <div class="tom-select-custom">
+            <select class="js-select js-datatable-filter form-select form-select-sm form-select-borderless" autocomplete="off"
+                    data-target-column-index="3"
+                    data-target-table="datatableColumnSearch"
+                    data-hs-tom-select-options='{
+                      "searchInDropdown": false,
+                      "hideSearch": true,
+                      "dropdownWidth": "10rem"
+                    }'>
+              <option value="null" selected>Any</option>
+              <option value="Active">Active</option>
+              <option value="Pending">Closed</option>
+              <option value="Suspended">Suspended</option>
+            </select>
+          </div>
+        </th>
+      </tr>
+      </thead>
+      {% for items in students %}
+  
+      <tbody>
+      
+  
+      <tr>
+        <td>
+          <span class="d-block h5 text-hover-primary mb-0">{{items.full_name}}</span>
+          <span class="d-block fs-5 text-body"></span>
+        </td>
+        <td>
+          <span class="d-block h5 mb-0">{{items.admission_number}}</span>
+          <span class="d-block fs-5"></span>
+        </td>
+        <td>{{items.batch}}</td>
+        <td>
+          <span class="legend-indicator bg-success"></span>{{items.status}}
+          
+        </td>
+        <td><div class="tom-select-custom">
+            <select class="js-select js-datatable-filter form-select form-select-sm form-select-borderless" autocomplete="off"
+                    data-target-column-index="3"
+                    data-target-table="datatableColumnSearch"
+                    data-hs-tom-select-options='{
+                      "searchInDropdown": false,
+                      "hideSearch": true,
+                      "dropdownWidth": "10rem"
+                    }'>
+              <option value="null" selected>Action</option>
+              <option value="View">View</option>
+              <option value="Delete">Delete</option>
+              <option value="update">Update</option>
+            </select>
+          </div></td>
+      </tr>
+  
+      
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+<!-- JS Implementing Plugins -->
+<script src="{% static 'assets/vendor/datatables.net.extensions/select/select.min.js' %}"></script>
+
+<!-- JS Front -->
+<script src="{% static 'assets/js/hs.datatables.js' %}"></script>
+
+<script>
+  (function () {
+    // INITIALIZATION OF SELECT
+    // =======================================================
+    HSCore.components.HSTomSelect.init('.js-select')
+
+
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+    const datatableColumnSearch = HSCore.components.HSDatatables.getItem('datatableColumnSearch')
+
+    document.getElementById('column1_search').addEventListener('keyup', function () {
+      datatableColumnSearch
+        .columns(0)
+        .search(this.value)
+        .draw()
+    })
+
+    document.getElementById('column2_search').addEventListener('keyup', function () {
+      datatableColumnSearch
+        .columns(1)
+        .search(this.value)
+        .draw()
+    })
+
+    document.getElementById('column3_search').addEventListener('keyup', function () {
+      datatableColumnSearch
+        .columns(2)
+        .search(this.value)
+        .draw()
+    })
+
+    document.querySelectorAll('.js-datatable-filter').forEach(function (item) {
+        item.addEventListener('change', function(e) {
+          const elVal = e.target.value,
+                  targetColumnIndex = e.target.getAttribute('data-target-column-index'),
+                  targetTable = e.target.getAttribute('data-target-table');
+
+          HSCore.components.HSDatatables.getItem(targetTable).column(targetColumnIndex).search(elVal !== 'null' ? elVal : '').draw()
+        })
+      })
+  })()
+</script>
+
+
+
+{% endblock %}

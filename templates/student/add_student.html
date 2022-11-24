@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h3 class="mt-5">Add Student</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+    
+
+    <!-- Input Group --><section class="row">
+    <div class="col-6">
+        
+<div class="mb-3">
+    
+        
+      <label for="inputGroupHoverLightFullName" class="form-label">Full name</label>
+  
+    <div class="input-group input-group-merge input-group-hover-light">
+      <div class="input-group-prepend input-group-text" id="inputGroupHoverLightFullNameAddOn">
+        <i class="bi-person"></i>
+      </div>
+      {{form.full_name}}
+    </div>
+  </div>  
+  <!-- End Input Group --> 
+  
+  <!-- Input Group -->
+   <div class="mb-3">
+    <label for="inputGroupHoverLightEmail" class="form-label">Date of Birth</label>  
+  
+    <!-- Flatpickr -->
+    
+{{form.date_of_birth}}
+<!-- End Flatpickr -->
+  </div> 
+  <!-- End Input Group -->
+  <div class="mb-3">
+    <label for="inputGroupHoverLightFullName" class="form-label">Birth Certificate</label>
+  
+    <div class="input-group input-group-merge input-group-hover-light">
+      <div class="input-group-prepend input-group-text" id="inputGroupHoverLightFullNameAddOn">
+         <i class="bi bi-card-image"></i> 
+      </div>
+      {{form.birth_certificate}}
+    </div>
+  </div>   
+  
+  
+  <!-- Input Group -->
+   <div class="mb-3">
+    <label for="inputGroupHoverLightGenderSelect" class="form-label">Gender</label>
+  
+    <div class="input-group input-group-merge input-group-hover-light">
+      <div class="input-group-prepend input-group-text"> 
+         <i class="bi-person"></i> 
+      </div>
+      {{form.gender}}
+    </div>
+  </div>  
+   <!-- End Input Group -->  
+  <!-- Input Group -->
+ <div class="mb-3">
+    <label for="inputGroupHoverLightGenderSelect" class="form-label">Batches</label>
+  
+    <div class="input-group input-group-merge input-group-hover-light">
+      <div class="input-group-prepend input-group-text">
+         <i class="bi-person"></i> 
+      </div>
+      {{form.batch}}
+    </div> 
+  </div> 
+   <!-- End Input Group --> 
+  
+</div>
+  <!-- Input Group -->
+
+
+   <div class="col-6">
+    <div class="mb-3">
+        <label for="inputGroupHoverLightFullName" class="form-label">Admission Number</label>
+      
+        <div class="input-group input-group-merge input-group-hover-light">
+          <div class="input-group-prepend input-group-text" id="inputGroupHoverLightFullNameAddOn">
+            <i class="bi bi-123"></i>
+          </div>
+          {{form.admission_number}}
+        </div>
+      </div>
+      <!-- <div class="mb-3">
+        <label for="inputGroupHoverLightGenderSelect" class="form-label">Academic Year</label>
+      
+        <div class="input-group input-group-merge input-group-hover-light">
+          <div class="input-group-prepend input-group-text">
+            <i class="bi bi-calendar"></i>
+          </div>
+          <select id="inputGroupHoverLightGenderSelect" class="form-select">
+            <option>select year</option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+          </select>
+        </div>
+      </div>  -->
+   <div class="mb-3">
+    <label for="inputGroupHoverLightEmailOptional" class="form-label">Parent Name <span class="form-label-secondary"></span></label>
+  
+    <div class="input-group input-group-merge input-group-hover-light">
+      <div class="input-group-prepend input-group-text" id="inputGroupHoverLightEmailOptionalAddOn">
+        <i class="bi-person"></i>
+      </div>
+      {{form.parent_name}}
+    </div>
+  </div>  
+  <!-- End Input Group -->
+  <!-- Input Group -->
+  <div class="mb-3">
+    <label for="inputGroupHoverLightEmailOptional" class="form-label">Mobile Number <span class="form-label-secondary"></span></label>
+  
+    <div class="input-group input-group-merge input-group-hover-light">
+      <div class="input-group-prepend input-group-text" id="inputGroupHoverLightEmailOptionalAddOn">
+        <i class="bi bi-phone-fill"></i>
+      </div>
+      {{form.mobile}}
+    </div>
+  </div>  
+  <!-- End Input Group -->
+  <!-- Input Group -->
+    <div class="mb-3">
+    <label for="inputGroupHoverLightEmailOptional" class="form-label">Email <span class="form-label-secondary">(Optional)</span></label>
+  
+    <div class="input-group input-group-merge input-group-hover-light">
+      <div class="input-group-prepend input-group-text" id="inputGroupHoverLightEmailOptionalAddOn">
+        <i class="bi-envelope-open"></i>
+      </div>
+      {{form.email}}
+    </div>
+  </div>
+  <div class="mb-3">
+    <p>Status</p>
+
+  {{form.status}}
+  <!-- End Input Group -->
+    </div>
+   </div>
+  </section>
+  <button class="btn btn-primary " type="submit" name="PlaceOrder">Submit <i class="bi bi-chevron-compact-right"></i></button>
+  
+  
+</form>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

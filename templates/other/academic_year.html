@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="card p-4">
+    <div class="row">
+        <div class="col-6">
+            <h2>Academic Year</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+               <div class="mt-4"> {{form.name}}</div>
+               <div class="mt-4">Current: {{form.current}}</div>
+               <div class="mt-4"> <input class="btn btn-sm btn-primary" type="submit" value="Add"></div>
+            </form>
+        </div>
+        <div class="col-1" >
+            <div style="width: 1px !important;height: 100vh;background-color: rgba(128, 128, 128, 0.205);"></div>
+        </div>
+        <div class="col-4">
+           <h4>Added List</h4>
+            {% for year in qs %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="fs-5"><strong>{{year.name}}</strong></th>
+                        <th class="fs-5 text-">
+                            {% if year.current %}
+               <strong> Current <i class="bi bi-check-circle-fill text-success"></i></strong>
+                {% endif %}
+                        </th>
+                        <th class="text-end">
+                            
+                               
+                             <a href="{% url 'academic_delete' year.pk %}" onclick="return confirm('Are you sure you want to delete this?')" class="bg-white border "><i class="bi bi-trash text-danger fs-5"></i></a>
+                           
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+           
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<script>
+ $(document).on('click', '.confirm-delete', function(){
+    return confirm('Are you sure you want to delete this?');
+})
+</script>
+{% endblock %}

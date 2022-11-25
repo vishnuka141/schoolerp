@@ -24,7 +24,7 @@
 
   <link rel="preload" href="{% static 'assets/css/theme.min.css' %}" data-hs-appearance="default" as="style">
   <link rel="preload" href="{% static 'assets/css/theme-dark.min.css' %}" data-hs-appearance="dark" as="style">
-
+  
   <style data-hs-appearance-onload-styles>
     *
     {
@@ -136,7 +136,7 @@
     <div class="navbar-nav-wrap">
       <!-- Logo -->
       <a class="navbar-brand" href="index.html" aria-label="Front">
-        <img class="navbar-brand-logo" src="assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
+        <img class="navbar-brand-logo" src="{% static 'assets/svg/logos/logo.svg' %}" alt="Logo" data-hs-theme-appearance="default">
         <img class="navbar-brand-logo" src="assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
         <img class="navbar-brand-logo-mini" src="assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
         <img class="navbar-brand-logo-mini" src="assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
@@ -160,10 +160,10 @@
           <li class="nav-item d-none d-sm-inline-block">
             <!-- Notification -->
             <div class="dropdown">
-              <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="navbarNotificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation>
+              <!-- <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="navbarNotificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation>
                 <i class="bi-bell"></i>
                 <span class="btn-status btn-sm-status btn-status-danger"></span>
-              </button>
+              </button> -->
 
               <div class="dropdown-menu dropdown-menu-end dropdown-card navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="navbarNotificationsDropdown" style="width: 25rem;">
                 <div class="card">
@@ -253,7 +253,7 @@
             <div class="dropdown">
               <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation>
                 <div class="avatar avatar-sm avatar-circle">
-                  <img class="avatar-img" src="assets/img/160x160/img6.jpg" alt="Image Description">
+                  <img class="avatar-img" src="{% static 'assets/img/160x160/img6.jpg' %}" alt="Image Description">
                   <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                 </div>
               </a>
@@ -262,11 +262,11 @@
                 <div class="dropdown-item-text">
                   <div class="d-flex align-items-center">
                     <div class="avatar avatar-sm avatar-circle">
-                      <img class="avatar-img" src="assets/img/160x160/img6.jpg" alt="Image Description">
+                      <img class="avatar-img" src="{% static 'assets/img/160x160/img6.jpg' %}" alt="Image Description">
                     </div>
                     <div class="flex-grow-1 ms-3">
-                      <h5 class="mb-0">Mark Williams</h5>
-                      <p class="card-text text-body">mark@site.com</p>
+                      <h5 class="mb-0">{{request.user}}</h5>
+                      <!-- <p class="card-text text-body">{{request.user.email}}</p> -->
                     </div>
                   </div>
                 </div>
@@ -284,11 +284,11 @@
                   <div class="d-flex align-items-center">
                     <div class="flex-shrink-0">
                       <div class="avatar avatar-sm avatar-dark avatar-circle">
-                        <span class="avatar-initials">HS</span>
+                        <span class="avatar-initials">J&J</span>
                       </div>
                     </div>
                     <div class="flex-grow-1 ms-2">
-                      <h5 class="mb-0">Site Name </h5>
+                      <h5 class="mb-0">J & J School </h5>
                     </div>
                   </div>
                 </a>
@@ -301,7 +301,7 @@
 
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" href="#">Sign out</a>
+                <a class="dropdown-item" href="{% url 'signout' %}">Sign out</a>
               </div>
             </div>
             <!-- End Account -->
@@ -323,7 +323,7 @@
         <!-- Logo -->
 
         <a class="navbar-brand" href="index.html" aria-label="Front">
-          <img class="navbar-brand-logo" src="assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo" src="{% static 'assets/svg/logos/logo.svg' %}" alt="Logo" data-hs-theme-appearance="default">
           <img class="navbar-brand-logo" src="assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
           <img class="navbar-brand-logo-mini" src="assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
           <img class="navbar-brand-logo-mini" src="assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
@@ -350,11 +350,17 @@
             </div>
 			
 			<!-- Collapse -->
+            
             <div class="nav-item">
-              <a class="nav-link dropdown-toggle" href="{% url 'add' %}" role="button" data-bs-toggle="collapse" data-bs-target="#Accounts" aria-expanded="true" aria-controls="Accounts">
-                <i class="bi-123 nav-icon"></i>
+              <a class="nav-link dropdown-toggle" href="#student" role="button" data-bs-toggle="collapse" data-bs-target="#student" aria-expanded="true" aria-controls="student">
+                <i class="bi-bag nav-icon"></i>
                 <span class="nav-link-title">Students</span>
               </a>
+
+              <div id="student" class="nav-collapse collapse" data-bs-parent="#navbarVerticalMenu">
+                <a class="nav-link" href="{% url 'list' %}">Students </a>
+                <a class="nav-link" href="{% url 'add' %}">Add student</a>
+              </div>
             </div>
             <!-- End Collapse -->
 			
@@ -375,8 +381,8 @@
               </a>
 
               <div id="Purchase" class="nav-collapse collapse" data-bs-parent="#navbarVerticalMenu">
-                <a class="nav-link" href="#">Record Payment </a>
-                <a class="nav-link" href="#">Payment type</a>
+                <a class="nav-link" href="{% url 'all_payment' %}">Record Payment </a>
+                <a class="nav-link" href="{% url 'payment_type' %}">Payment type</a>
               </div>
             </div>
             <!-- End Collapse -->
@@ -393,6 +399,19 @@
             </div>
 			
 			<!-- Collapse -->
+      	<!-- Collapse -->
+        <div class="nav-item">
+          <a class="nav-link dropdown-toggle" href="#other" role="button" data-bs-toggle="collapse" data-bs-target="#other" aria-expanded="true" aria-controls="other">
+            <i class="bi-bag nav-icon"></i>
+            <span class="nav-link-title">Other</span>
+          </a>
+
+          <div id="other" class="nav-collapse collapse" data-bs-parent="#navbarVerticalMenu">
+            <a class="nav-link" href="{% url 'academic_year' %}">Academic Year </a>
+            <a class="nav-link" href="#"></a>
+          </div>
+        </div>
+        <!-- End Collapse -->
             <!-- End Collapse -->
 
            </div>
@@ -456,7 +475,7 @@
               <!-- Language -->
               <div class="dropdown dropup">
                 <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                  <img class="avatar avatar-xss avatar-circle" src="assets/vendor/flag-icon-css/flags/1x1/us.svg" alt="United States Flag">
+                  <img class="avatar avatar-xss avatar-circle" src="{% static 'assets/vendor/flag-icon-css/flags/1x1/us.svg' %}" alt="United States Flag">
                 </button>
 
                 <div class="dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectLanguageDropdown">
@@ -484,6 +503,19 @@
   <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">
+      {% if messages %}
+              <p class="text-danger">
+                  {% for message in messages %}
+              
+                      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} {% endif %}
+                      
+                      <div class="alert alert-soft-danger alert-dismissible fade show" role="alert">
+                        <span class="fw-semibold">{{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                  {% endfor %}
+                </p>
+              {% endif %}
   {% block content %}
 
   {% endblock %}
@@ -752,7 +784,21 @@
       }
     })()
   </script>
-
+<script>
+  (function () {
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+  })()
   
+
+  (function() {
+    // INITIALIZATION OF ADD FIELD
+    // =======================================================
+    new HSAddField('.js-add-field')
+  });
+</script>
+
+<script src="./assets/vendor/hs-add-field/dist/hs-add-field.min.js"></script>
 </body>
 </html>

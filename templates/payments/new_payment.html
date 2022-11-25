@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<h2>Add new payment</h2>
+<div class="card p-4">
+    <form action="">
+        <div class="mt-2">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-4 mt-3"><label for="">Student Name:</label></div>
+                <div class="col-md-8 mt-3"><input type="text"></div>
+                <div class="col-md-4 mt-3"><label for="">Academic Year:</label></div>
+                <div class="col-md-8 mt-3"><input type="text"></div>
+                <div class="col-md-4 mt-3"><label for="">Term:</label></div>
+                <div class="col-md-8 mt-3"><input type="text"></div>
+                <div class="col-md-4 mt-3"><label for="">Class:</label></div>
+                <div class="col-md-8 mt-3"><input type="text"></div>
+                <div class="col-md-4 mt-3"><label for="">Status:</label></div>
+                <div class="col-md-8 mt-3"><input type="text"></div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <p>Fee Struture</p>
+                   
+                    <div class="container1">
+                        <button class="add_form_field">Add New Field &nbsp; 
+                          <span style="font-size:16px; font-weight:bold;">+ </span>
+                        </button>
+                        <div class="d-flex justify-content-between  mt-2">
+                            <div><input type="text" name="mytext[]"></div>
+                            
+                           <div> <input type="text" name="mytext1[]"/></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{{form}}
+<script>
+    $(document).ready(function() {
+    var max_fields = 10;
+    var wrapper = $(".container1");
+    var add_button = $(".add_form_field");
+
+    var x = 1;
+    $(add_button).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            $(wrapper).append('<div><input type="text" name="mytext[]"/><input type="text" name="mytext1[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
+        } else {
+            alert('You Reached the limits')
+        }
+    });
+
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+});
+</script>
+{% endblock %}

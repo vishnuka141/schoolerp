@@ -1,6 +1,6 @@
 from django import forms
 from .models import Student
-
+from main.models import Academic_year
 
 class StudentForm(forms.ModelForm):
     # parent_name= forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

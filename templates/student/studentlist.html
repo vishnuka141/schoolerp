@@ -10,7 +10,7 @@
 
 
 <div class="table-responsive datatable-custom">
-    <table id="datatableColumnSearch" class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+    <table id="datatableColumnSearch" class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table  pb-5"
            data-hs-datatables-options='{
                    "order": [],
                    "orderCellsTop": true
@@ -21,6 +21,7 @@
         <th>Admission Number</th>
         <th>Class</th>
         <th>Status</th>
+        <th></th>
       </tr>
       <tr>
         <th>
@@ -45,10 +46,11 @@
               <option value="null" selected>Any</option>
               <option value="Active">Active</option>
               <option value="Pending">Closed</option>
-              <option value="Suspended">Suspended</option>
+              <!-- <option value="Suspended">Suspended</option> -->
             </select>
           </div>
         </th>
+        <th></th>
       </tr>
       </thead>
       {% for items in students %}
@@ -70,21 +72,19 @@
           <span class="legend-indicator bg-success"></span>{{items.status}}
           
         </td>
-        <td><div class="tom-select-custom">
-            <select class="js-select js-datatable-filter form-select form-select-sm form-select-borderless" autocomplete="off"
-                    data-target-column-index="3"
-                    data-target-table="datatableColumnSearch"
-                    data-hs-tom-select-options='{
-                      "searchInDropdown": false,
-                      "hideSearch": true,
-                      "dropdownWidth": "10rem"
-                    }'>
-              <option value="null" selected>Action</option>
-              <option value="View">View</option>
-              <option value="Delete">Delete</option>
-              <option value="update">Update</option>
-            </select>
-          </div></td>
+        <td><!-- Dropdown -->
+          <div class="dropdown">
+            <a class="btn btn- dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> 
+              Action
+            </a> 
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="{% url 'detail' items.pk %}">View</a>
+              <a class="dropdown-item" href="{% url 'delete' items.pk %}">Delete</a>
+              <a class="dropdown-item" href="{% url 'update' items.id %}">Update</a>
+            </div>
+          </div>
+          <!-- End Dropdown -->
+          
       </tr>
   
       
